@@ -4,14 +4,12 @@
 
 class SDLApp {
 private:
-	SDL_Window* m_window;
-	SDL_GLContext m_glContext;
+	SDL_Window* _window;
+	SDL_GLContext _glContext;
 	
-	int m_xRes;
-	int m_yRes;
+	int _xRes, _yRes;
 	
-	bool m_done;
-	bool m_fullscreen;
+	bool _done = false;
 	
 	void initGL();
 	
@@ -32,9 +30,9 @@ public:
 	SDL_GLContext& context();
 };
 
-inline bool SDLApp::done() const { return m_done; }
-inline SDL_Window* SDLApp::window() { return m_window; }
-inline SDL_GLContext& SDLApp::context() { return m_glContext; }
+inline bool SDLApp::done() const { return _done; }
+inline SDL_Window* SDLApp::window() { return _window; }
+inline SDL_GLContext& SDLApp::context() { return _glContext; }
 
 
 #endif

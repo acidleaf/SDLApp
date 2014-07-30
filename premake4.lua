@@ -10,21 +10,37 @@ solution "SDLApp"
 		
 		pchheader "include/pch.h"
 		
+		
 		files { "include/**.h", "src/**.cc" }
-		
-		includedirs { "D:/Lib/SDL/i686-w64-mingw32/include", "include", "include/**" }
-		libdirs { "D:/Lib/SDL/i686-w64-mingw32/lib"}
-		
-		links { "SDL2", "mingw32", "SDL2main", "SDL2.dll", "opengl32" }
-		linkoptions {  }
+		includedirs { "include", "include/**" }
+		links { "SDL2", "SDL2main", "freenect" }
 		
 		buildoptions { "--std=c++11" }
+		
+		if os.is("windows") then
+			includedirs { "D:/Lib/SDL/i686-w64-mingw32/include" }
+			libdirs { "D:/Lib/SDL/i686-w64-mingw32/lib"}
+			links { "mingw32", "opengl32" }
+			
+		elseif os.is("macosx") then
+			includedirs { "/usr/local/include" }
+			libdirs { "/usr/local/lib"}
+			linkoptions { "-framework OpenGL" }
+		end
+		
+		
+		
 		
 		configuration "Debug"
 			targetdir "bin/Debug"
 			objdir "obj/Debug"
 			flags { "Symbols" }
-			buildoptions { "-mconsole" }		-- Console for logging debug output
+			
+			buildoptions { "-Wall" }
+			
+			if os.is("windows") then
+				buildoptions { "-mconsole" }		-- Console for logging debug output (Windows)
+			end
 			
 		configuration "Release"
 			targetdir "bin/Release"
