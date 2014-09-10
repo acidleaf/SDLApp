@@ -1,33 +1,28 @@
-#include "SDLApp.h"
+#include "App.h"
 
 
 // A base SDL App that displays an empty window
 
 int main(int argc,  char * argv[]) {
 	
-	SDLApp app;
+	App* app = App::getInstance();
 	
-	// Init SDL
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		printf("Error initializing SDL\n");
-		
-		return 1;
+	if (!app->init("SDLApp", 800, 600)) {
+		printf("Failed initializing app\n");
+		return -1;
 	}
 	
-	app.init("SDLApp", 800, 600);
-	
-	
-	while (!app.done()) {
-		app.handleEvents();
+	while (!app->done()) {
+		app->handleEvents();
 		
-		app.update();
+		app->update();
 		
-		app.render();
+		app->render();
 	}
 	
 	
-	app.release();
-	SDL_Quit();
+	app->release();
 	
+	delete app;
 	return 0;
 }

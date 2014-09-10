@@ -13,14 +13,14 @@ solution "SDLApp"
 		
 		files { "include/**.h", "src/**.cc" }
 		includedirs { "include", "include/**" }
-		links { "SDL2", "SDL2main", "freenect" }
+		links { "SDL2", "glew" }
 		
 		buildoptions { "--std=c++11" }
 		
 		if os.is("windows") then
 			includedirs { "D:/Lib/SDL/i686-w64-mingw32/include" }
 			libdirs { "D:/Lib/SDL/i686-w64-mingw32/lib"}
-			links { "mingw32", "opengl32" }
+			links { "mingw32", "opengl32", "SDL2main" }
 			
 		elseif os.is("macosx") then
 			includedirs { "/usr/local/include" }

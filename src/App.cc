@@ -1,12 +1,29 @@
-#include "SDLApp.h"
+#include "App.h"
 
-SDLApp::SDLApp() {
+
+static App* _appInstance = nullptr;
+
+App*& App::getInstance() {
+	if (!_appInstance) _appInstance = new App();
+	return _appInstance;
 }
 
-SDLApp::~SDLApp() {
-}
 
-bool SDLApp::init(const char* title, int width, int height) {
+App::App() {}
+
+App::~App() {}
+
+bool App::init(const char* title, int width, int height) {
+	
+	_resX = width;
+	_resY = height;
+	
+	
+	// Init SDL
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Error initializing SDL\n");
+		return -1;
+	}
 	
 	// Set OpenGL parameters to speed up drawing
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -17,21 +34,9 @@ bool SDLApp::init(const char* title, int width, int height) {
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 0);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 0);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 0);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 0);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
-	SDL_GL_SetAttribute(SDL_GL_STEREO, 0);
-	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-	SDL_GL_SetAttribute(SDL_GL_RETAINED_BACKING, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	
-	
-	
-	_xRes = width;
-	_yRes = height;
 	
 	// Init window
 	_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
@@ -42,67 +47,71 @@ bool SDLApp::init(const char* title, int width, int height) {
 	
 	// Init context
 	_glContext = SDL_GL_CreateContext(_window);
+	SDL_GL_MakeCurrent(_window, _glContext);
+	
+	glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK) {
+		printf("Failed to init GLEW\n");
+		return false;
+	}
 	
 	// Print GL version strings
 	printf("OpenGL version: %s\n", glGetString(GL_VERSION));
 	printf("GLSL version: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 	
-	SDL_GetWindowSize(_window, &_xRes, &_yRes);
+	//SDL_GetWindowSize(_window, &_resX, &_resY);
 	
 	// Initialize OpenGL states
 	initGL();
 	
 	
+	
+	// Initialize your stuff here
+	if (!_scene.init()) return false;
+	
+	
+	
+	
 	return true;
 }
 
-void SDLApp::release() {
+void App::release() {
 	SDL_GL_DeleteContext(_glContext);
 	SDL_DestroyWindow(_window);
+	SDL_Quit();
 }
 
 
-void SDLApp::initGL() {
-	
-	glViewport(0, 0, _xRes, _yRes);
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
-	
+void App::initGL() {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
 	
-	
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	
 }
 
 
-void SDLApp::handleEvents() {
+void App::handleEvents() {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) _done = true;
-		
 	}
 }
 
-void SDLApp::update() {
+
+
+void App::update() {
+	_scene.update();
 }
 
-void SDLApp::render() {
-	glClear(GL_COLOR_BUFFER_BIT);
+void App::render() {
+	glViewport(0, 0, _resX, _resY);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
+	
+	_scene.render();
 	
 	SDL_GL_SwapWindow(_window);
 }
