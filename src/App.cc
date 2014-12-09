@@ -97,6 +97,9 @@ void App::handleEvents() {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) _done = true;
+		
+		// Quit when ESC key is pressed
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) _done = true;
 	}
 }
 

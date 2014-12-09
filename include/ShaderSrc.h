@@ -4,6 +4,9 @@
 namespace ShaderSrc {
 	extern const char* basicVsh;
 	extern const char* basicFsh;
+	
+	extern const char* surfaceVsh;
+	extern const char* surfaceFsh;
 };
 
 #endif

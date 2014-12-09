@@ -8,7 +8,7 @@ solution "SDLApp"
 		kind "ConsoleApp"
 		language "C++"
 		
-		pchheader "include/pch.h"
+		pchheader "include/pch.hpp"
 		
 		
 		files { "include/**.h", "src/**.cc" }
