@@ -9,7 +9,6 @@ protected:
 	GLuint _shaderID;
 	GLuint _vao, _vbo, _ibo;
 	
-	
 	glm::mat4 _mvp;
 	
 public:

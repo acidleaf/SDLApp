@@ -3,8 +3,6 @@
 
 #include <string>
 
-#define BUFFER_OFFSET(i) ((char*)NULL + (i))
-
 namespace Shader {
 	GLuint compileShader(const std::string& shaderFilename, GLenum shaderType);
 	GLuint createProgram(const std::string& vertexFileName, const std::string& fragmentFileName);
