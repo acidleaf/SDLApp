@@ -1,6 +1,7 @@
 #ifndef __SHADER_H__
 #define __SHADER_H__
 
+#include "pch.hpp"
 #include <string>
 
 namespace Shader {

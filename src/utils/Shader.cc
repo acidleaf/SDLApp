@@ -13,7 +13,7 @@ GLuint Shader::compileShaderSrc(const char* shaderSrc, GLenum shaderType) {
 	// Check shader
 	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compilationSuccess);
 	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	if (infoLogLength > 0) {
+	if (!compilationSuccess) {
 		std::vector<char> errorMsg(infoLogLength + 1);
 		glGetShaderInfoLog(shaderID, infoLogLength, nullptr, &errorMsg[0]);
 		printf("Error compiling shader: %s\n", &errorMsg[0]);
@@ -65,7 +65,7 @@ GLuint Shader::createProgram(const std::string& vshPath, const std::string& fshP
 	glGetProgramiv(progID, GL_LINK_STATUS, &compilationSuccess);
 	glGetProgramiv(progID, GL_INFO_LOG_LENGTH, &infoLogLength);
 	
-	if (infoLogLength > 0) {
+	if (!compilationSuccess) {
 		std::vector<char> errorMsg(infoLogLength + 1);
 		glGetProgramInfoLog(progID, infoLogLength, nullptr, &errorMsg[0]);
 		printf("Error compiling shader: %s\n", &errorMsg[0]);
@@ -94,7 +94,7 @@ GLuint Shader::createProgramSrc(const char* vshSrc, const char* fshSrc) {
 	glGetProgramiv(progID, GL_LINK_STATUS, &compilationSuccess);
 	glGetProgramiv(progID, GL_INFO_LOG_LENGTH, &infoLogLength);
 	
-	if (infoLogLength > 0) {
+	if (!compilationSuccess) {
 		std::vector<char> errorMsg(infoLogLength + 1);
 		glGetProgramInfoLog(progID, infoLogLength, nullptr, &errorMsg[0]);
 		printf("Error compiling shader: %s\n", &errorMsg[0]);

@@ -17,16 +17,9 @@ solution "SDLApp"
 		
 		buildoptions { "--std=c++11" }
 		
-		if os.is("windows") then
-			includedirs { "D:/Lib/SDL/i686-w64-mingw32/include" }
-			libdirs { "D:/Lib/SDL/i686-w64-mingw32/lib"}
-			links { "mingw32", "opengl32", "SDL2main" }
-			
-		elseif os.is("macosx") then
-			includedirs { "/usr/local/include" }
-			libdirs { "/usr/local/lib"}
-			linkoptions { "-framework OpenGL" }
-		end
+		includedirs { "/usr/local/include" }
+		libdirs { "/usr/local/lib"}
+		linkoptions { "-framework OpenGL" }
 		
 		
 		
@@ -37,10 +30,6 @@ solution "SDLApp"
 			flags { "Symbols" }
 			
 			buildoptions { "-Wall" }
-			
-			if os.is("windows") then
-				buildoptions { "-mconsole" }		-- Console for logging debug output (Windows)
-			end
 			
 		configuration "Release"
 			targetdir "bin/Release"

@@ -3,7 +3,7 @@
 
 // A base SDL App that displays an empty window
 
-int main(int argc,  char * argv[]) {
+int main(int argc,  char* argv[]) {
 	
 	App* app = App::getInstance();
 	

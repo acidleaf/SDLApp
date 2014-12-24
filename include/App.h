@@ -1,6 +1,7 @@
 #ifndef __App_H__
 #define __App_H__
 
+#include "pch.hpp"
 #include "Scene.h"
 
 class App {
