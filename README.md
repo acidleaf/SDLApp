@@ -3,6 +3,11 @@
 This is my SDL app skeleton.
 [premake4](http://industriousone.com/premake) is used to generate the project files.
 
+Update 26 Dec 2014:
+- Added BasicMesh utility class
+- Changed startup scene to a rotating 3D cube
+- Updated the shader to render the cube
+
 Update 24 Dec 2014:
 - Added Visual Studio 12 project files
 - Fixed shader compilation checking

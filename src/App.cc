@@ -59,8 +59,6 @@ bool App::init(const char* title, int width, int height) {
 	printf("OpenGL version: %s\n", glGetString(GL_VERSION));
 	printf("GLSL version: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 	
-	//SDL_GetWindowSize(_window, &_resX, &_resY);
-	
 	// Initialize OpenGL states
 	initGL();
 	
@@ -84,9 +82,9 @@ void App::release() {
 
 void App::initGL() {
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 	
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	

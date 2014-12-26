@@ -2,15 +2,16 @@
 #define __SCENE_H__
 
 #include "pch.hpp"
+#include "BasicMesh.h"
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+
 
 class Scene {
 protected:
-	GLuint _shaderID;
-	GLuint _vao, _vbo, _ibo;
+	GLuint _cubeShader;
+	BasicMesh _cube;
 	
-	glm::mat4 _mvp;
+	glm::mat4 _proj, _view, _model;
 	
 public:
 	bool init();
