@@ -40,14 +40,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IncludePath>$(SolutionDir)\..\include\utils;$(SolutionDir)\..\include;D:\Libraries\glm;D:\Libraries\glew\include;D:\Libraries\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\include\utils\imgui;$(SolutionDir)\..\include\utils;$(SolutionDir)\..\include;D:\Libraries\glm;D:\Libraries\glew\include;D:\Libraries\SDL2\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionPath)\..\src;$(SolutionPath)\..\src\utils;$(SourcePath)</SourcePath>
     <LibraryPath>D:\Libraries\SDL2\lib\$(PlatformTarget);D:\Libraries\glew\lib\Release\$(Platform);$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)..\obj\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IncludePath>$(SolutionDir)\..\include\utils;$(SolutionDir)\..\include;D:\Libraries\glm;D:\Libraries\glew\include;D:\Libraries\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\include\utils\imgui;$(SolutionDir)\..\include\utils;$(SolutionDir)\..\include;D:\Libraries\glm;D:\Libraries\glew\include;D:\Libraries\SDL2\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionPath)\..\src;$(SolutionPath)\..\src\utils;$(SourcePath)</SourcePath>
     <LibraryPath>D:\Libraries\SDL2\lib\$(PlatformTarget);D:\Libraries\glew\lib\Release\$(Platform);$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)..\obj\$(Configuration)\$(Platform)\</IntDir>
@@ -89,6 +89,9 @@
     <ClCompile Include="..\src\main.cc" />
     <ClCompile Include="..\src\Scene.cc" />
     <ClCompile Include="..\src\ShaderSrc.cc" />
+    <ClCompile Include="..\src\utils\BasicMesh.cc" />
+    <ClCompile Include="..\src\utils\Gui.cc" />
+    <ClCompile Include="..\src\utils\imgui\imgui.cc" />
     <ClCompile Include="..\src\utils\RenderPass.cc" />
     <ClCompile Include="..\src\utils\Shader.cc" />
     <ClCompile Include="..\src\utils\Surface.cc" />
@@ -99,6 +102,12 @@
     <ClInclude Include="..\include\pch.hpp" />
     <ClInclude Include="..\include\Scene.h" />
     <ClInclude Include="..\include\ShaderSrc.h" />
+    <ClInclude Include="..\include\utils\BasicMesh.h" />
+    <ClInclude Include="..\include\utils\Gui.h" />
+    <ClInclude Include="..\include\utils\imgui\imconfig.h" />
+    <ClInclude Include="..\include\utils\imgui\imgui.h" />
+    <ClInclude Include="..\include\utils\imgui\stb_image.h" />
+    <ClInclude Include="..\include\utils\imgui\stb_textedit.h" />
     <ClInclude Include="..\include\utils\RenderPass.h" />
     <ClInclude Include="..\include\utils\Shader.h" />
     <ClInclude Include="..\include\utils\Surface.h" />

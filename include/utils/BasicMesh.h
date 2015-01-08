@@ -10,6 +10,8 @@
 	- Only uses one index buffer and one vertex buffer
 */
 
+#include "pch.hpp"
+
 class BasicMesh {
 protected:
 	GLenum _drawMode, _elementType;
