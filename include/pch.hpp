@@ -10,5 +10,9 @@
 
 #include <cstdio>
 #include <climits>
+#include <cstring>
 
 #define BUFFER_OFFSET(i) ((char*)NULL + (i))
+
+
+#include <glm/glm.hpp>

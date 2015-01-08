@@ -3,6 +3,9 @@
 This is my SDL app skeleton.
 [premake4](http://industriousone.com/premake) is used to generate the project files.
 
+Update 8 Jan 2015:
+- Added basic GUI support using [ImGui](https://github.com/ocornut/imgui)
+
 Update 26 Dec 2014:
 - Added BasicMesh utility class
 - Changed startup scene to a rotating 3D cube

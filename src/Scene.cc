@@ -78,6 +78,5 @@ void Scene::render() {
 	glUniformMatrix4fv(uLoc, 1, GL_FALSE, &_model[0][0]);
 	
 	
-	
 	_cube.render();
 }

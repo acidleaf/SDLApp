@@ -65,6 +65,8 @@ bool App::init(const char* title, int width, int height) {
 	
 	
 	// Initialize your stuff here
+	if (!_gui.init()) return false;
+	
 	if (!_scene.init()) return false;
 	
 	
@@ -74,6 +76,10 @@ bool App::init(const char* title, int width, int height) {
 }
 
 void App::release() {
+	_scene.release();
+	
+	_gui.release();
+	
 	SDL_GL_DeleteContext(_glContext);
 	SDL_DestroyWindow(_window);
 	SDL_Quit();
@@ -98,12 +104,15 @@ void App::handleEvents() {
 		
 		// Quit when ESC key is pressed
 		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) _done = true;
+		
+		_gui.handleEvents(e);
 	}
 }
 
 
 
 void App::update() {
+	_gui.update();
 	_scene.update();
 }
 
@@ -113,6 +122,8 @@ void App::render() {
 	
 	
 	_scene.render();
+	
+	_gui.render();
 	
 	SDL_GL_SwapWindow(_window);
 }

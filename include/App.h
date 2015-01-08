@@ -3,6 +3,7 @@
 
 #include "pch.hpp"
 #include "Scene.h"
+#include "Gui.h"
 
 class App {
 private:
@@ -13,6 +14,7 @@ private:
 	bool _done = false;
 	
 	Scene _scene;
+	Gui _gui;
 	
 	
 	void initGL();
@@ -38,6 +40,8 @@ public:
 	int resY() const { return _resY; }
 	
 	static App*& getInstance();
+	
+	Gui* gui() { return &_gui; }
 };
 
 
