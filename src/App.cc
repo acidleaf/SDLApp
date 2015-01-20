@@ -106,6 +106,10 @@ void App::handleEvents() {
 		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) _done = true;
 		
 		_gui.handleEvents(e);
+		
+		if (!ImGui::GetIO().WantCaptureKeyboard && !ImGui::GetIO().WantCaptureMouse) {
+			// Your event handling code here
+		}
 	}
 }
 

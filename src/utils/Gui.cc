@@ -57,6 +57,8 @@ bool Gui::init() {
 	
 	auto app = App::getInstance();
 	
+	_prevTime = SDL_GetTicks();
+	
 	// Setup ImGui stuffs
 	if (!initImGui()) return false;
 	
@@ -114,6 +116,17 @@ void Gui::release() {
 	ImGui::Shutdown();
 }
 
+void gui_RenderDrawLists(ImDrawList** const lists, int count) {
+	App::getInstance()->gui()->imguiRender(lists, count);
+}
+void gui_SetClipboardFunc(const char* text) {
+	SDL_SetClipboardText(text);
+}
+const char* gui_GetClipboardFunc() {
+	return SDL_GetClipboardText();
+}
+
+
 bool Gui::initImGui() {
 	int w = App::getInstance()->resX();
 	int h = App::getInstance()->resY();
@@ -125,27 +138,28 @@ bool Gui::initImGui() {
 	io.PixelCenterOffset = 0.0f;
 	io.IniFilename = nullptr;
 	io.LogFilename = nullptr;
-	io.KeyMap[ImGuiKey_Tab] = SDLK_TAB;
-    io.KeyMap[ImGuiKey_LeftArrow] = SDLK_LEFT;
-    io.KeyMap[ImGuiKey_RightArrow] = SDLK_RIGHT;
-    io.KeyMap[ImGuiKey_UpArrow] = SDLK_UP;
-    io.KeyMap[ImGuiKey_DownArrow] = SDLK_DOWN;
-    io.KeyMap[ImGuiKey_Home] = SDLK_HOME;
-    io.KeyMap[ImGuiKey_End] = SDLK_END;
-    io.KeyMap[ImGuiKey_Delete] = SDLK_DELETE;
-    io.KeyMap[ImGuiKey_Backspace] = SDLK_BACKSPACE;
-    io.KeyMap[ImGuiKey_Enter] = SDLK_RETURN;
-    io.KeyMap[ImGuiKey_Escape] = SDLK_ESCAPE;
-    io.KeyMap[ImGuiKey_A] = SDLK_a;
-    io.KeyMap[ImGuiKey_C] = SDLK_c;
-    io.KeyMap[ImGuiKey_V] = SDLK_v;
-    io.KeyMap[ImGuiKey_X] = SDLK_x;
-    io.KeyMap[ImGuiKey_Y] = SDLK_y;
-    io.KeyMap[ImGuiKey_Z] = SDLK_z;
+	
+	io.KeyMap[ImGuiKey_Tab] = SDL_SCANCODE_TAB;
+    io.KeyMap[ImGuiKey_LeftArrow] = SDL_SCANCODE_LEFT;
+    io.KeyMap[ImGuiKey_RightArrow] = SDL_SCANCODE_RIGHT;
+    io.KeyMap[ImGuiKey_UpArrow] = SDL_SCANCODE_UP;
+    io.KeyMap[ImGuiKey_DownArrow] = SDL_SCANCODE_DOWN;
+    io.KeyMap[ImGuiKey_Home] = SDL_SCANCODE_HOME;
+    io.KeyMap[ImGuiKey_End] = SDL_SCANCODE_END;
+    io.KeyMap[ImGuiKey_Delete] = SDL_SCANCODE_DELETE;
+    io.KeyMap[ImGuiKey_Backspace] = SDL_SCANCODE_BACKSPACE;
+    io.KeyMap[ImGuiKey_Enter] = SDL_SCANCODE_RETURN;
+    io.KeyMap[ImGuiKey_Escape] = SDL_SCANCODE_ESCAPE;
+    io.KeyMap[ImGuiKey_A] = SDL_SCANCODE_A;
+    io.KeyMap[ImGuiKey_C] = SDL_SCANCODE_C;
+    io.KeyMap[ImGuiKey_V] = SDL_SCANCODE_V;
+    io.KeyMap[ImGuiKey_X] = SDL_SCANCODE_X;
+    io.KeyMap[ImGuiKey_Y] = SDL_SCANCODE_Y;
+    io.KeyMap[ImGuiKey_Z] = SDL_SCANCODE_Z;
 	
 	io.RenderDrawListsFn = gui_RenderDrawLists;
-	//io.SetClipboardTextFn = ImImpl_SetClipboardTextFn;
-	//io.GetClipboardTextFn = ImImpl_GetClipboardTextFn;
+	io.SetClipboardTextFn = gui_SetClipboardFunc;
+	io.GetClipboardTextFn = gui_GetClipboardFunc;
 	
 	
 	
@@ -171,17 +185,22 @@ bool Gui::initImGui() {
 
 
 void Gui::update() {
+	// Start the frame
+	ImGui::NewFrame();
+	
+	
 	ImGuiIO& io = ImGui::GetIO();
 	
 	// Setup timestep
-	static float prevTime = 0.0f;
-	const float curTime = SDL_GetTicks() * 0.001f;
-	io.DeltaTime = (curTime - prevTime) / 1000.0f;
-	prevTime = curTime;
+	const GLuint curTime = SDL_GetTicks();
+	if (curTime == _prevTime) io.DeltaTime = 1.0f / 60.0f;
+	else io.DeltaTime = (curTime - _prevTime) * 0.001f;
+	_prevTime = curTime;
 	
 	
-	// Start the frame
-	ImGui::NewFrame();
+	// Deal with text input
+	if (io.WantCaptureKeyboard) SDL_StartTextInput();
+	else SDL_StopTextInput();
 	
 }
 
@@ -191,9 +210,7 @@ void Gui::render() {
 	ImGui::Render();
 }
 
-void gui_RenderDrawLists(ImDrawList** const lists, int count) {
-	App::getInstance()->gui()->imguiRender(lists, count);
-}
+
 
 
 void Gui::imguiRender(ImDrawList** const lists, int listCount) {
@@ -217,9 +234,47 @@ void Gui::imguiRender(ImDrawList** const lists, int listCount) {
 	uLoc = glGetUniformLocation(_guiShader, "fontTex");
 	glUniform1i(uLoc, 0);
 	
+	/*
+	// Grow our buffer according to what we need
+    size_t total_vtx_count = 0;
+	for (int i = 0; i < listCount; i++) {
+		total_vtx_count += lists[i]->vtx_buffer.size();
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+	size_t neededBufferSize = total_vtx_count * sizeof(ImDrawVert);
+	if (neededBufferSize > _maxVBOSize) {
+		_maxVBOSize = neededBufferSize + 5000;
+		glBufferData(GL_ARRAY_BUFFER, _maxVBOSize, nullptr, GL_STREAM_DRAW);
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	*/
 	
 	
+	// Actual rendering of the ImDrawLists
+	glBindVertexArray(_vao);
+	for (int i = 0; i < listCount; ++i) {
+		
+		const ImDrawList* cmdList = lists[i];
+		const unsigned char* vtx_buffer = (const unsigned char*)cmdList->vtx_buffer.begin();
+		
+		
+		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(ImDrawVert) * cmdList->vtx_buffer.size(), vtx_buffer);
+		
+		// I got lazy here, copied from the example
+		int vtx_offset = 0;
+		const ImDrawCmd* pcmd_end = cmdList->commands.end();
+		for (const ImDrawCmd* pcmd = cmdList->commands.begin(); pcmd != pcmd_end; pcmd++) {
+			
+			glScissor((int)pcmd->clip_rect.x, (int)(ImGui::GetIO().DisplaySize.y - pcmd->clip_rect.w), (int)(pcmd->clip_rect.z - pcmd->clip_rect.x), (int)(pcmd->clip_rect.w - pcmd->clip_rect.y));
+			
+			glDrawArrays(GL_TRIANGLES, vtx_offset, pcmd->vtx_count);
+			vtx_offset += pcmd->vtx_count;
+		}
+		
+	}
 	
+	/*
 	// Grow our buffer according to what we need
     size_t total_vtx_count = 0;
 	for (int i = 0; i < listCount; i++) {
@@ -259,7 +314,7 @@ void Gui::imguiRender(ImDrawList** const lists, int listCount) {
 			cmd_offset += pcmd->vtx_count;
 		}
 	}
-	
+	*/
 	
 	glBindVertexArray(0);
     glUseProgram(0);
@@ -286,7 +341,44 @@ void Gui::handleEvents(const SDL_Event& e) {
 	if (e.type == SDL_MOUSEBUTTONUP) {
 		if (e.button.button == SDL_BUTTON_LEFT) io.MouseDown[0] = false;
 		if (e.button.button == SDL_BUTTON_RIGHT) io.MouseDown[1] = false;
-	} if (e.type == SDL_MOUSEWHEEL) {
+	}
+	if (e.type == SDL_MOUSEWHEEL) {
 		io.MouseWheel += (float)e.wheel.y;
+	}
+	
+	
+	if (e.type == SDL_KEYDOWN) {
+		io.KeysDown[e.key.keysym.scancode] = true;
+		
+		SDL_Keymod mod = SDL_GetModState();
+		io.KeyCtrl = (mod & KMOD_CTRL);
+		io.KeyShift = (mod & KMOD_SHIFT);
+		
+		
+		
+		/*
+		if (c >= 0x00 & c <= 0x7A) {
+			if (c >= 'a' && c <= 'z') {
+				if (io.KeyShift) io.AddInputCharacter(c - 0x20);
+				else io.AddInputCharacter(c);
+			} else if (c >= '0' && c <= '9') {
+				if (io.KeyShift) io.AddInputCharacter(c - 0x0F);
+				else io.AddInputCharacter(c);
+			} else io.AddInputCharacter(c);
+		}
+		*/
+		
+	} else if (e.type == SDL_KEYUP) {
+		io.KeysDown[e.key.keysym.scancode] = false;
+		io.KeyCtrl = (e.key.keysym.mod & KMOD_CTRL);
+		io.KeyShift = (e.key.keysym.mod & KMOD_SHIFT);
+	}
+	
+	
+	if (e.type == SDL_TEXTINPUT) {
+		const char* text = e.text.text;
+		for (int i = 0; text[i] != 0; ++i) {
+			io.AddInputCharacter(text[i]);
+		}
 	}
 }

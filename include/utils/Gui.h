@@ -7,12 +7,12 @@
 
 class Gui {
 protected:
-	GLuint _maxVBOSize = 20000;
+	GLuint _maxVBOSize = 1024;
 	
 	GLuint _vao, _vbo;
 	GLuint _fontTexID;
 	GLuint _guiShader = 0;
-	
+	GLuint _prevTime = 0;
 	glm::mat4 _proj;
 	
 	bool initImGui();

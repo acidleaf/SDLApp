@@ -105,14 +105,14 @@ void Surface::render() {
 	glBindTexture(GL_TEXTURE_2D, _texID);
 	
 	glm::mat4 mvp = _proj * _view * _model;
-	GLuint mvpLoc = glGetUniformLocation(_shaderProg, "_mvp");
-	glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, &mvp[0][0]);
+	GLuint uloc = glGetUniformLocation(_shaderProg, "_mvp");
+	glUniformMatrix4fv(uloc, 1, GL_FALSE, &mvp[0][0]);
 	
-	GLuint texLoc = glGetUniformLocation(_shaderProg, "_tex");
-	glUniform1i(texLoc, 0);
+	uloc = glGetUniformLocation(_shaderProg, "_tex");
+	glUniform1i(uloc, 0);
 	
-	GLuint alphaLoc = glGetUniformLocation(_shaderProg, "_alpha");
-	glUniform1f(alphaLoc, _alpha);
+	uloc = glGetUniformLocation(_shaderProg, "_alpha");
+	glUniform1f(uloc, _alpha);
 	
 	_surface.render();
 }
