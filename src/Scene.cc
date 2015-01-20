@@ -63,7 +63,7 @@ void Scene::release() {
 }
 
 void Scene::update() {
-	_model = glm::rotate(_model, 1.0f, glm::vec3(0, 1, 0));
+	_model = glm::rotate(_model, glm::radians(1.0f), glm::vec3(0, 1, 0));
 }
 
 void Scene::render() {

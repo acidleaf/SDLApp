@@ -14,5 +14,5 @@
 
 #define BUFFER_OFFSET(i) ((char*)NULL + (i))
 
-
+#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
