@@ -2,6 +2,7 @@
 #define __SURFACE_H__
 
 #include "pch.hpp"
+#include "BasicMesh.h"
 
 class Surface {
 protected:
@@ -13,9 +14,9 @@ protected:
 	GLfloat _alpha = 1.0f;
 	
 	GLuint _texID;
-	GLuint _vao, _vbo, _ibo;
+	BasicMesh _surface;
 	
-	glm::mat4 _mvp;
+	glm::mat4 _proj, _view, _model;
 	
 public:
 	bool init(GLuint texID, GLuint width, GLuint height);
