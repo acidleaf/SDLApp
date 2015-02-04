@@ -34,3 +34,16 @@ GLuint Texture::createTexture3D(Tex3D& tex, const void* data) {
 	
 	return tex.id;
 }
+
+void Texture::updateTexture2D(const Tex2D& tex, const void* data) {
+	glBindTexture(GL_TEXTURE_2D, tex.id);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, tex.width, tex.height, tex.format, tex.type, data);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+
+void Texture::updateTexture3D(const Tex3D& tex, const void* data) {
+	glBindTexture(GL_TEXTURE_3D, tex.id);
+	glTexSubImage3D(GL_TEXTURE_3D, 0, 0, 0, 0, tex.width, tex.height, tex.depth, tex.format, tex.type, data);
+	glBindTexture(GL_TEXTURE_3D, 0);
+}

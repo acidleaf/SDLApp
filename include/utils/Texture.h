@@ -23,6 +23,9 @@ struct Tex3D {
 namespace Texture {
 	GLuint createTexture2D(Tex2D& tex, const void* data = nullptr);
 	GLuint createTexture3D(Tex3D& tex, const void* data = nullptr);
+	
+	void updateTexture2D(const Tex2D& tex, const void* data);
+	void updateTexture3D(const Tex3D& tex, const void* data);
 };
 
 
