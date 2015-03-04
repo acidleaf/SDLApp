@@ -4,13 +4,17 @@
 
 // Wrapper for the C++11 random generators
 
-
+#include <chrono>
 #include <random>
 
 class Random {
 	std::mt19937 _rng;
 public:
-	Random() { std::random_device rd; _rng.seed(rd()); }
+	Random() {
+		auto duration = std::chrono::system_clock::now().time_since_epoch();
+		auto seed = std::chrono::duration_cast<std::chrono::microseconds>(duration).count();
+		_rng.seed(seed);
+	}
 	Random(unsigned int seed) { _rng.seed(seed); }
 	
 	float operator()(float max = 1.0f) {
@@ -30,6 +34,11 @@ public:
 		std::uniform_int_distribution<int> dist(min, max);
 		return dist(_rng);
 	}
+	
+	static Random& get() { static Random rng; return rng; }
 };
+
+#define RNG (Random::get())
+
 
 #endif

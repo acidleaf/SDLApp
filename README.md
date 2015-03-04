@@ -3,6 +3,10 @@
 This is my SDL app skeleton.
 [premake4](http://industriousone.com/premake) is used to generate the project files.
 
+Update 4 March 2015:
+- Updated Random wrapper class with a globally available instance
+- Added an Elapsed class for high resolution timing.
+
 Update 8 Jan 2015:
 - Added basic GUI support using [ImGui](https://github.com/ocornut/imgui)
 
