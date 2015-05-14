@@ -3,6 +3,9 @@
 This is my SDL app skeleton.
 [premake4](http://industriousone.com/premake) is used to generate the project files.
 
+Update 14 May 2015:
+- Made Surface properly support grayscale textures
+
 Update 4 March 2015:
 - Updated Random wrapper class with a globally available instance
 - Added an Elapsed class for high resolution timing.

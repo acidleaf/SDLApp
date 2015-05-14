@@ -79,7 +79,4 @@ void Scene::render() {
 	
 	
 	_cube.render();
-	
-	char buffer[256] = {0};
-	ImGui::InputText("Text", buffer, 256);
 }

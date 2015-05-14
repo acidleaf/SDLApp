@@ -29,9 +29,11 @@ out vec4 frag_color;
 
 uniform sampler2D _tex;
 uniform float _alpha;
+uniform bool _grayscale;
 
 void main() {
-	frag_color = vec4(texture(_tex, f_uv).rgb, _alpha);
+	vec3 color = texture(_tex, f_uv).rgb;
+	frag_color = vec4(_grayscale ? color.rrr : color.rgb, _alpha);
 }
 )shader_src";
 
@@ -40,7 +42,7 @@ void main() {
 GLuint Surface::_shaderProg = 0;
 
 
-bool Surface::init(GLuint texID, GLuint width, GLuint height) {
+bool Surface::init(GLuint texID, GLuint width, GLuint height, bool grayscale) {
 	
 	if (texID == 0) return false;
 	if (width == 0 && height == 0) return false;
@@ -48,6 +50,7 @@ bool Surface::init(GLuint texID, GLuint width, GLuint height) {
 	_texID = texID;
 	_width = width;
 	_height = height;
+	_grayscale = grayscale;
 	
 	
 	// x, y, tx, ty
@@ -113,6 +116,9 @@ void Surface::render() {
 	
 	uloc = glGetUniformLocation(_shaderProg, "_alpha");
 	glUniform1f(uloc, _alpha);
+	
+	uloc = glGetUniformLocation(_shaderProg, "_grayscale");
+	glUniform1i(uloc, _grayscale);
 	
 	_surface.render();
 }

@@ -12,6 +12,7 @@ protected:
 	GLuint _width = 0, _height = 0;
 	GLint _x = 0, _y = 0;
 	GLfloat _alpha = 1.0f;
+	bool _grayscale = false;
 	
 	GLuint _texID;
 	BasicMesh _surface;
@@ -19,7 +20,7 @@ protected:
 	glm::mat4 _proj, _view, _model;
 	
 public:
-	bool init(GLuint texID, GLuint width, GLuint height);
+	bool init(GLuint texID, GLuint width, GLuint height, bool grayscale = false);
 	void update();
 	void render();
 	void release();
