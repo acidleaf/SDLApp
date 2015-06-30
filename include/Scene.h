@@ -18,6 +18,7 @@ public:
 	void update();
 	void render();
 	void release();
+	void handleEvents(const SDL_Event& e);
 };
 
 #endif

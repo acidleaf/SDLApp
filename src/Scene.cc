@@ -80,3 +80,7 @@ void Scene::render() {
 	
 	_cube.render();
 }
+
+void Scene::handleEvents(const SDL_Event& e) {
+	
+}

@@ -3,6 +3,9 @@
 This is my SDL app skeleton.
 [premake4](http://industriousone.com/premake) is used to generate the project files.
 
+Update 30 June 2015:
+- Added handleEvents function to the Scene class.
+
 Update 14 May 2015:
 - Made Surface properly support grayscale textures
 

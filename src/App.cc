@@ -109,6 +109,7 @@ void App::handleEvents() {
 		
 		if (!ImGui::GetIO().WantCaptureKeyboard && !ImGui::GetIO().WantCaptureMouse) {
 			// Your event handling code here
+			_scene.handleEvents(e);
 		}
 	}
 }
