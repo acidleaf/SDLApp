@@ -3,6 +3,10 @@
 This is my SDL app skeleton.
 [premake4](http://industriousone.com/premake) is used to generate the project files.
 
+Update 18 Jan 2016:
+- Refactored most components
+- Removed dependency on GLEW, using [glad](https://github.com/Dav1dde/glad) instead
+
 Update 30 June 2015:
 - Added handleEvents function to the Scene class.
 

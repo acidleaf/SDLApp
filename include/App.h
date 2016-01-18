@@ -1,48 +1,47 @@
-#ifndef __App_H__
-#define __App_H__
+#ifndef __APP_H__
+#define __APP_H__
 
-#include "pch.hpp"
-#include "Scene.h"
-#include "Gui.h"
+#include "pch.h"
+#include "GUI.h"
+#include "nanovg.h"
+#include "SceneManager.h"
 
 class App {
-private:
-	SDL_Window* _window;
-	SDL_GLContext _glContext;
+protected:
+	SDL_Window* _window = nullptr;
+	SDL_GLContext _ctx;
+	SDL_Texture* _tex;
 	
-	int _resX, _resY;
 	bool _done = false;
 	
-	Scene _scene;
+	int _w = 0, _h = 0;
+	int argc = 0;
+	const char** argv = nullptr;
+	
 	Gui _gui;
+	NVGcontext* _vg = nullptr;
 	
-	
+	SceneManager _scene;
+
 	void initGL();
-	
-public:
-	App();
-	~App();
-	
-	bool init(const char* title, int width, int height);
-	void release();
-	
-	void handleEvents();
 	void update();
 	void render();
+	void handleEvents();
 	
+public:
+	bool init(const char* title, int resX, int resY, int argc, const char** argv);
+	void release();
 	
-	bool done() const { return _done; }
-	SDL_Window* window() { return _window; }
-	SDL_GLContext& context() { return _glContext; }
-	
-	
-	int resX() const { return _resX; }
-	int resY() const { return _resY; }
+	void run();
+	void exit() { _done = true; }
 	
 	static App*& getInstance();
 	
-	Gui* gui() { return &_gui; }
+	int w() const { return _w; }
+	int h() const { return _h; }
+	
+	
+	NVGcontext* vg() { return _vg; }
 };
-
 
 #endif

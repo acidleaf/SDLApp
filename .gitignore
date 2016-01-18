@@ -6,6 +6,7 @@ bin/**
 *.opensdf
 *.suo
 *.vcxproj.user
+*.ini
 
 Makefile
 *.make

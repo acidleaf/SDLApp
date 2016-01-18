@@ -8,19 +8,16 @@ solution "SDLApp"
 		kind "ConsoleApp"
 		language "C++"
 		
-		pchheader "include/pch.hpp"
-		
 		
 		files { "include/**.h", "src/**.cc" }
 		includedirs { "include", "include/**" }
-		links { "SDL2", "glew" }
+		links { "SDL2" }
 		
 		buildoptions { "--std=c++11" }
 		
 		includedirs { "/usr/local/include" }
 		libdirs { "/usr/local/lib"}
 		linkoptions { "-framework OpenGL" }
-		
 		
 		
 		
