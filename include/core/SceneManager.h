@@ -6,7 +6,14 @@
 class IScene;
 class SceneManager {
 protected:
+	static const int MAX_SCENES = 10;
+	
+	IScene* _scenes[MAX_SCENES];
+	int _numScenes = 0;
+	
 	IScene* _active = nullptr;
+	
+	IScene* addScene(const char* name, IScene* scene);
 	
 public:
 	bool init();

@@ -15,7 +15,7 @@ public:
 	virtual void update() = 0;
 	virtual void render() = 0;
 	
-	virtual void handleEvents(const SDL_Event& e) = 0;
+	virtual bool handleEvents(const SDL_Event& e) = 0;
 
 	virtual IStream* stream() = 0;
 
