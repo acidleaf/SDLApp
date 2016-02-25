@@ -4,10 +4,8 @@
 
 #ifdef __APPLE__
 #include <SDL2/SDL.h>
-//#include <SDL2/SDL_net.h>
 #else
 #include <SDL.h>
-#include <SDL_net.h>
 #endif
 
 #define GLM_FORCE_RADIANS
@@ -25,11 +23,4 @@
 #define printf SDL_Log
 #endif
 
-#define MAX_ROI 100
-#define MAX_RESULTS 500
 #define LABEL_SIZE 32
-
-#define HOSTNAME_SIZE 128
-#define RCV_BUFFER_SIZE 1024
-
-#define LOCATER_LBL "locater"

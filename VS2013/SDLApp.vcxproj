@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1CF2B1C8-0E41-4F5B-B317-D1AB21189526}</ProjectGuid>
+    <RootNamespace>SDLApp</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IncludePath>$(SolutionDir)\..\include\thirdparty;$(SolutionDir)\..\include\core;$(SolutionDir)\..\include;$(LIB_PATH)\glm;$(LIB_PATH)\glew\include;$(LIB_PATH)\SDL2\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionPath)\..\src;$(SolutionPath)\..\src\thirdparty;$(SolutionPath)\..\src\core;$(SourcePath)</SourcePath>
+    <LibraryPath>$(LIB_PATH)\SDL2\lib\$(PlatformTarget)\$(Configuration);$(LIB_PATH)\SDL2\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)..\obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IncludePath>$(SolutionDir)\..\include\thirdparty;$(SolutionDir)\..\include\core;$(SolutionDir)\..\include;$(LIB_PATH)\glm;$(LIB_PATH)\glew\include;$(LIB_PATH)\SDL2\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionPath)\..\src;$(SolutionPath)\..\src\thirdparty;$(SolutionPath)\..\src\core;$(SourcePath)</SourcePath>
+    <LibraryPath>$(LIB_PATH)\SDL2\lib\$(PlatformTarget)\$(Configuration);$(LIB_PATH)\SDL2\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)..\obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IncludePath>$(SolutionDir)\..\include\thirdparty;$(SolutionDir)\..\include\core;$(SolutionDir)\..\include;$(LIB_PATH)\glm;$(LIB_PATH)\glew\include;$(LIB_PATH)\SDL2\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionPath)\..\src;$(SolutionPath)\..\src\thirdparty;$(SolutionPath)\..\src\core;$(SourcePath)</SourcePath>
+    <LibraryPath>$(LIB_PATH)\SDL2\lib\$(PlatformTarget)\$(Configuration);$(LIB_PATH)\SDL2\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)..\obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IncludePath>$(SolutionDir)\..\include\thirdparty;$(SolutionDir)\..\include\core;$(SolutionDir)\..\include;$(LIB_PATH)\glm;$(LIB_PATH)\glew\include;$(LIB_PATH)\SDL2\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionPath)\..\src;$(SolutionPath)\..\src\thirdparty;$(SolutionPath)\..\src\core;$(SourcePath)</SourcePath>
+    <LibraryPath>$(LIB_PATH)\SDL2\lib\$(PlatformTarget)\$(Configuration);$(LIB_PATH)\SDL2\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)..\obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sdl2.lib;sdl2main.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sdl2.lib;sdl2main.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sdl2.lib;sdl2main.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sdl2.lib;sdl2main.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\App.h" />
+    <ClInclude Include="..\include\core\BasicMesh.h" />
+    <ClInclude Include="..\include\core\Gui.h" />
+    <ClInclude Include="..\include\core\IScene.h" />
+    <ClInclude Include="..\include\core\pch.h" />
+    <ClInclude Include="..\include\core\SceneManager.h" />
+    <ClInclude Include="..\include\core\Shader.h" />
+    <ClInclude Include="..\include\core\Surface.h" />
+    <ClInclude Include="..\include\core\Texture.h" />
+    <ClInclude Include="..\include\core\Utils.h" />
+    <ClInclude Include="..\include\thirdparty\fontstash.h" />
+    <ClInclude Include="..\include\thirdparty\glad\glad.h" />
+    <ClInclude Include="..\include\thirdparty\imconfig.h" />
+    <ClInclude Include="..\include\thirdparty\imgui.h" />
+    <ClInclude Include="..\include\thirdparty\imgui_internal.h" />
+    <ClInclude Include="..\include\thirdparty\KHR\khrplatform.h" />
+    <ClInclude Include="..\include\thirdparty\nanovg.h" />
+    <ClInclude Include="..\include\thirdparty\nanovg_gl.h" />
+    <ClInclude Include="..\include\thirdparty\nanovg_gl_utils.h" />
+    <ClInclude Include="..\include\thirdparty\stb_image.h" />
+    <ClInclude Include="..\include\thirdparty\stb_rect_pack.h" />
+    <ClInclude Include="..\include\thirdparty\stb_textedit.h" />
+    <ClInclude Include="..\include\thirdparty\stb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\App.cc" />
+    <ClCompile Include="..\src\core\BasicMesh.cc" />
+    <ClCompile Include="..\src\core\Gui.cc" />
+    <ClCompile Include="..\src\core\main.cc" />
+    <ClCompile Include="..\src\core\SceneManager.cc" />
+    <ClCompile Include="..\src\core\Shader.cc" />
+    <ClCompile Include="..\src\core\Surface.cc" />
+    <ClCompile Include="..\src\core\Texture.cc" />
+    <ClCompile Include="..\src\core\Utils.cc" />
+    <ClCompile Include="..\src\thirdparty\glad.cc" />
+    <ClCompile Include="..\src\thirdparty\imgui.cc" />
+    <ClCompile Include="..\src\thirdparty\imgui_demo.cc" />
+    <ClCompile Include="..\src\thirdparty\imgui_draw.cc" />
+    <ClCompile Include="..\src\thirdparty\nanovg.cc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
